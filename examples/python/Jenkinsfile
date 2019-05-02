@@ -21,7 +21,6 @@ pipeline {
       steps {
         container('python') {
           sh "echo \"Your config: ${config}\""
-          sh "python -m unittest"
           sh "${config.script_to_run}"
         }
       }
