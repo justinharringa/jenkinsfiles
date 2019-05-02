@@ -22,6 +22,7 @@ pipeline {
         container('python') {
           sh "Your config: ${config}"
           sh "python -m unittest"
+          sh "${config.script_to_run}"
         }
       }
     }
