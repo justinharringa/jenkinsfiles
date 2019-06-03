@@ -1,8 +1,6 @@
 def config = readYaml text: "${env.PIPELINE_CONFIG}"
 pipeline {
-  agent {
-    label "jenkins-python"
-  }
+  agent any
   stages {
     stage("run run.sh") {
       steps {
