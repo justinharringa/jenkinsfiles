@@ -6,10 +6,9 @@ pipeline {
   stages {
     stage("run run ANYTHING") {
       steps {
-        container(config.container) {
-          echo "What to run: ${config.run_me}"
-          sh "${config.run_me}"
-        }
+        echo "What to run: ${config.run_me}"
+        sh "${config.run_me}"
+        sh "docker run --rm ${config.docker_container} ${config.script_to_run}"
       }
     }
   }

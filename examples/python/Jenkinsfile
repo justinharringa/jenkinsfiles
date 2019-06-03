@@ -8,10 +8,8 @@ pipeline {
         branch 'PR-*'
       }
       steps {
-        container('python') {
-          echo "Your config: ${config}"
-          sh "${config.script_to_run}"
-        }
+        echo "Your config: ${config}"
+        sh "docker run --rm ${config.docker_container} ${config.script_to_run}"
       }
     }
     stage('Build Release') {
@@ -19,21 +17,9 @@ pipeline {
         branch 'master'
       }
       steps {
-        container('python') {
-
-          // ensure we're not on a detached head
-          sh "git checkout master"
-          sh "git config --global credential.helper store"
-          //sh "jx step git credentials"
-
-          // so we can retrieve the version in later steps
-          //sh "echo \$(jx-release-version) > VERSION"
-          //sh "jx step tag --version \$(cat VERSION)"
-          //sh "python -m unittest"
-          echo "Your config: ${config}"
-          sh "${config.script_to_run}"
-          echo "RELEASED!"
-        }
+        echo "Your config: ${config}"
+        sh "docker run --rm ${config.docker_container} ${config.script_to_run}"
+        echo "RELEASED!"
       }
     }
   }
