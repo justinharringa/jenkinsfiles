@@ -9,7 +9,7 @@ pipeline {
       }
       steps {
         echo "Your config: ${config}"
-        sh "docker run --rm python:3.7-stretch /bin/sh -c \"${config.script_to_run}\""
+        sh "docker run --rm -v `pwd`:/tmp/project python:3.7-stretch /bin/sh -c \"cd /tmp/project && ${config.script_to_run}\""
       }
     }
     stage('Build Release') {
@@ -18,7 +18,7 @@ pipeline {
       }
       steps {
         echo "Your config: ${config}"
-        sh "docker run --rm python:3.7-stretch /bin/sh -c \"${config.script_to_run}\""
+        sh "docker run --rm -v `pwd`:/tmp/project python:3.7-stretch /bin/sh -c \"cd /tmp/project && ${config.script_to_run}\""
         echo "RELEASED!"
       }
     }
