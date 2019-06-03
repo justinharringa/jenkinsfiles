@@ -7,8 +7,7 @@ pipeline {
     stage("run run ANYTHING") {
       steps {
         echo "What to run: ${config.run_me}"
-        sh "${config.run_me}"
-        sh "docker run --rm -v `pwd`:/tmp/project ${config.docker_container} /bin/sh -c \"cd /tmp/project && ${config.script_to_run}\""
+        sh "docker run --rm -v `pwd`:/tmp/project ${config.docker_container} /bin/sh -c \"cd /tmp/project && ${config.run_me}\""
       }
     }
   }
